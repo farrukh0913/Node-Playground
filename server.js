@@ -79,7 +79,8 @@ app.post("/api/user", async (req, res)=> {
 app.put("/api/users/:id", async (req, res)=> {
   try{
     const {id} = req.params;
-    const user = await userModel.findByIdAndUpdate(id, req.body)
+    const user = await userModel.findByIdAndUpdate(id, req.body, { new: true })
+    console.log('user:123123 ', user);
     if(!user){
       return res.status(404).json({message: `cannot find record with Id: ${id}`});
     }
