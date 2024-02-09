@@ -1,15 +1,45 @@
 const { Router } = require('express');
 const app = Router();
 const userModel = require("../models/userModel");
+const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send("Home");
-});
+// Swagger Start
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Node JS API with MongoDB',
+      version: '1.0.0'
+    },
+    servers: [
+      {
+        url: `http://localhost:${port}/`
+      }
+    ]
+  },
+  apis: ['/server.js']
+}
+
+const swaggerSpecs = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+// Swagger End
 
 app.get("/", (req, res) => {
   res.send("<h2>API is Running</h2>").toString();
 });
 
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Get users
+ *     responses:
+ *       200:
+ *         description: Successful response with a users
+ */
 app.get("/api/users", async (req, res) => {
   userModel
     .find()
