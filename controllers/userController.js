@@ -1,46 +1,20 @@
 const { Router } = require('express');
-const app = Router();
 const userModel = require("../models/userModel");
+const app = Router();
 const port = 3000;
 
-// Swagger Start
-const swaggerJSDoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
-
-const swaggerOptions = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Node JS API with MongoDB',
-      version: '1.0.0'
-    },
-    servers: [
-      {
-        url: `http://localhost:${port}/`
-      }
-    ]
-  },
-  apis: ['/server.js']
-}
-
-const swaggerSpecs = swaggerJSDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
-// Swagger End
+  /* Swagger Start */
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerFile = true ? YAML.load('./swagger.yml') : require('./swagger.json');
+app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+  /* Swagger End */
 
 app.get("/", (req, res) => {
   res.send("<h2>API is Running</h2>").toString();
 });
 
-/**
- * @swagger
- * /api/users:
- *   get:
- *     summary: Get users
- *     responses:
- *       200:
- *         description: Successful response with a users
- */
-app.get("/api/users", async (req, res) => {
+app.get("/users", async (req, res) => {
   userModel
     .find()
     .then(function (users) {
@@ -52,8 +26,9 @@ app.get("/api/users", async (req, res) => {
     });
 });
 
-app.post("/api/user", async (req, res) => {
+app.post("/user", async (req, res) => {
   try {
+
     const user = await userModel.create(req.body);
     res.status(200).json(user);
   } catch (error) {
@@ -62,11 +37,10 @@ app.post("/api/user", async (req, res) => {
   }
 });
 
-app.put("/api/users/:id", async (req, res) => {
+app.put("/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const user = await userModel.findByIdAndUpdate(id, req.body, { new: true });
-    console.log("user:123123 ", user);
     if (!user) {
       return res
         .status(404)
@@ -80,7 +54,7 @@ app.put("/api/users/:id", async (req, res) => {
   }
 });
 
-app.delete("/api/users/:id", async (req, res) => {
+app.delete("/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const user = await userModel.findByIdAndDelete(id, req.body);

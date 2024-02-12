@@ -1,0 +1,5884 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Config Module
+  license:
+    name: Proprietary
+    url: https://iotechglobal.io/licenses/LICENSE-1.0.html
+  x-vendor-info:
+    name: IoTech LLC
+    url: http://localhost:3000
+    email: admin@iotechglobal.io
+    address:
+    street:
+    city:
+    state:
+    zip:
+    country:
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /components:
+    post:
+      summary: create component operation
+      operationId: createComponent
+      tags:
+        - component, tag
+      requestBody:
+        description: create component post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /components/{component_uuid}:
+    put:
+      summary: update component operation
+      operationId: updateComponent
+      tags:
+        - component, tag
+      parameters:
+        - name: component_uuid
+          in: path
+          description: Component UUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update component and tag put request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete component operation
+      operationId: deleteComponent
+      tags:
+        - component, tag
+      parameters:
+        - name: component_uuid
+          in: path
+          description: Component UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /components/{component_uuid}/tags/{tag_uuid}:
+    delete:
+      summary: delete tag operation
+      operationId: deleteComponentTag
+      tags:
+        - component, tag
+      parameters:
+        - name: component_uuid
+          in: path
+          description: Component UUID
+          required: true
+          schema:
+            type: string
+
+        - name: tag_uuid
+          in: path
+          description: Tag UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /models/{model_uuid}/tags/{tag_uuid}:
+    delete:
+      summary: delete model tag operation
+      operationId: deleteModelTag
+      tags:
+        - model, tag
+      parameters:
+        - name: model_uuid
+          in: path
+          description: Model UUID
+          required: true
+          schema:
+            type: string
+        - name: tag_uuid
+          in: path
+          description: Tag UUID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /components/{component_uuid}/image:
+    delete:
+      summary: delete component image operation
+      operationId: deleteComponentImage
+      tags:
+        - component, image
+      parameters:
+        - name: component_uuid
+          in: path
+          description: Component UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /components/{component_uuid}/properties/{property_uuid}:
+    delete:
+      summary: delete property operation
+      operationId: deleteComponentProperty
+      tags:
+        - component, property
+      parameters:
+        - name: component_uuid
+          in: path
+          description: Component UUID
+          required: true
+          schema:
+            type: string
+
+        - name: property_uuid
+          in: path
+          description: Property UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /models:
+    post:
+      summary: create model operation
+      operationId: createModel
+      tags:
+        - model
+      requestBody:
+        description: create model post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /models/{model_uuid}:
+    put:
+      summary: update model operation
+      operationId: updateModel
+      tags:
+        - model
+      parameters:
+        - name: model_uuid
+          in: path
+          description: Model UUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update model
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+    delete:
+      summary: delete model operation
+      operationId: deleteModel
+      tags:
+        - model
+      parameters:
+        - name: model_uuid
+          in: path
+          description: Model UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /models/{model_uuid}/delete:
+    post:
+      summary: delete model operation
+      operationId: deleteModelWithAuth
+      tags:
+        - model
+      parameters:
+        - name: model_uuid
+          in: path
+          description: Model UUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: auth details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+
+  /models/{model_uuid}/image:
+    delete:
+      summary: delete model image operation
+      operationId: deleteModelImage
+      tags:
+        - model, image
+      parameters:
+        - name: model_uuid
+          in: path
+          description: Model UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /models/{model_uuid}/properties/{property_uuid}:
+    delete:
+      summary: delete property operation
+      operationId: deleteModelProperty
+      tags:
+        - model, property
+      parameters:
+        - name: model_uuid
+          in: path
+          description: Model UUID
+          required: true
+          schema:
+            type: string
+
+        - name: property_uuid
+          in: path
+          description: Property UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /assets:
+    post:
+      summary: create asset operation
+      operationId: createAsset
+      tags:
+        - asset
+      requestBody:
+        description: create asset post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+    get:
+      summary: get asset operation
+      operationId: readAllAsset
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: false
+      tags:
+        - asset
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /assets/{asset_uuid}:
+    put:
+      summary: update asset operation
+      operationId: updateAsset
+      tags:
+        - asset
+      parameters:
+        - name: asset_uuid
+          in: path
+          description: Asset UUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update asset
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+    delete:
+      summary: delete asset operation
+      operationId: deleteAsset
+      tags:
+        - asset
+      parameters:
+        - name: asset_uuid
+          in: path
+          description: Asset UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+    get:
+      summary: get asset operation
+      operationId: readAsset
+      tags:
+        - asset
+      parameters:
+        - name: asset_uuid
+          in: path
+          description: Asset UUID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /assets/{asset_uuid}/summary:
+    get:
+      summary: get asset summary operation
+      operationId: readAssetSummary
+      tags:
+        - asset
+      parameters:
+        - name: asset_uuid
+          in: path
+          description: Asset UUID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /assets/{asset_uuid}/delete:
+    post:
+      summary: delete asset operation
+      operationId: deleteAssetWithAuth
+      tags:
+        - asset
+      parameters:
+        - name: asset_uuid
+          in: path
+          description: Asset UUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: auth details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+
+  /writeback:
+    post:
+      summary: Tag WriteBack operation
+      operationId: writeback
+      tags:
+        - WriteBack
+      requestBody:
+        description: tag details with auth
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+
+  /assets/{asset_uuid}/properties/{property_uuid}:
+    delete:
+      summary: delete property operation
+      operationId: deleteAssetProperty
+      tags:
+        - asset, property
+      parameters:
+        - name: asset_uuid
+          in: path
+          description: Component UUID
+          required: true
+          schema:
+            type: string
+
+        - name: property_uuid
+          in: path
+          description: Property UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /registered-nodes:
+    post:
+      summary: register new node
+      operationId: createRegisteredNode
+      tags:
+        - Asset
+      requestBody:
+        description: add register node request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /registered-nodes/{registeredNode_id}/unregister:
+    post:
+      summary: update registeredNode operation
+      operationId: unregisterRegisteredNode
+      tags:
+        - registeredNode
+      parameters:
+        - name: registeredNode_id
+          in: path
+          description: registeredNode ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: update registeredNode put request
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - $ref: '#/components/schemas/Header'
+                - {}
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /registered-nodes/{registeredNode_id}/register:
+    post:
+      summary: update registeredNode operation
+      operationId: registerRegisteredNode
+      tags:
+        - registeredNode
+      parameters:
+        - name: registeredNode_id
+          in: path
+          description: registeredNode ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: update registeredNode put request
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - $ref: '#/components/schemas/Header'
+                - {}
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+  /registered-nodes/{registeredNode_id}:
+    delete:
+      summary: delete RegisteredNode operation
+      operationId: deleteRegisteredNode
+      tags:
+        - RegisteredNode
+      parameters:
+        - name: registeredNode_id
+          in: path
+          description: RegisteredNode ID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+  /datasources:
+    post:
+      summary: create datasource operation
+      operationId: createDatasource
+      tags:
+        - datasource
+      requestBody:
+        description: create datasource post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /datasources/{datasource_uuid}:
+    put:
+      summary: update datasource operation
+      operationId: updateDatasource
+      tags:
+        - datasource
+      parameters:
+        - name: datasource_uuid
+          in: path
+          description: Datasource UUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update datasource
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete datasource operation
+      operationId: deleteDatasource
+      tags:
+        - datasource
+      parameters:
+        - name: datasource_uuid
+          in: path
+          description: Datasource UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+
+
+  /measurements:
+    post:
+      summary: create measurement operation
+      operationId: createMeasurement
+      tags:
+        - measurement
+      requestBody:
+        description: create measurement post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /measurements/{measurement_id}:
+    put:
+      summary: update measurement operation
+      operationId: updateMeasurement
+      tags:
+        - measurement
+      parameters:
+        - name: measurement_id
+          in: path
+          description: Measurement ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: update measurement
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    patch:
+      summary: update measurement operation
+      operationId: upsertMeasurement
+      tags:
+        - measurement
+      parameters:
+        - name: measurement_id
+          in: path
+          description: Measurement ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: update measurement
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete measurement operation
+      operationId: deleteMeasurement
+      tags:
+        - measurement
+      parameters:
+        - name: measurement_id
+          in: path
+          description: Measurement ID
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /datasource-nodes:
+    post:
+      summary: create datasource nodeoperation
+      operationId: createDatasourceNode
+      tags:
+        - datasource node
+      requestBody:
+        description: create datasource node post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /datasource-nodes/{ds_node_uuid}:
+    put:
+      summary: update datasource node operation
+      operationId: updateDatasourceNode
+      tags:
+        - datasource node
+      parameters:
+        - name: ds_node_uuid
+          in: path
+          description: Datasource Node UUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update datasource node
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete datasource node operation
+      operationId: deleteDatasourceNode
+      tags:
+        - datasource node
+      parameters:
+        - name: ds_node_uuid
+          in: path
+          description: Datasource Node UUID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+  /uom:
+    post:
+      summary: create uom operation
+      operationId: createUom
+      tags:
+        - uom
+      requestBody:
+        description: create uom post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+
+  /uom/{uom_id}:
+
+    patch:
+      summary: update uom operation
+      operationId: updateUom
+      tags:
+        - uom
+      parameters:
+        - name: uom_id
+          in: path
+          description: Uom ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: update uom
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete uom operation
+      operationId: deleteUom
+      tags:
+        - uom
+      parameters:
+        - name: uom_id
+          in: path
+          description: Uom ID
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /entity-dsnode-links:
+    post:
+      summary: create entity dsnode link operation
+      operationId: createEntityDsNodeLink
+      tags:
+        - Entity Datasource Node link
+      requestBody:
+        description: Create Entity Datasource node link
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /entity-dsnode-links/{entity_dsnode_id}/link:
+    post:
+      summary: update Entity Datasource Node Link
+      operationId: linkEntityDsNode
+      tags:
+        - Update Entity Datasource Node Link
+      parameters:
+        - name: entity_dsnode_id
+          in: path
+          description: Entity DS UUID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /entity-dsnode-links/{entity_dsnode_id}/unlink:
+    post:
+      summary: Unlink Entity Datasource Node
+      operationId: unlinkEntityDsNode
+      tags:
+        - Delete Entity Datasource Node Link
+      parameters:
+        - in: query
+          name: comment_code
+          required: true
+          schema:
+            type: string
+        - name: entity_dsnode_id
+          in: path
+          description: Entity DS Node UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /entity-dsnode-links/{entity_dsnode_id}:
+    delete:
+      summary: Delete Entity Datasource Node
+      operationId: deleteEntityDsNodeLink
+      tags:
+        - Delete Entity Datasource Node Link
+      parameters:
+        - name: entity_dsnode_id
+          in: path
+          description: Entity DS Node UUID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /tag-mapping-links:
+    post:
+      summary: create tag mapping link operation
+      operationId: createTagMapping
+      tags:
+        - Tag mapping Link
+      requestBody:
+        description: Create Tag mapping Link
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /tag-mapping-links/link:
+    post:
+      summary: link tag mapping
+      operationId: linkTagMapping
+      tags:
+        - Link Tag mapping
+      requestBody:
+        description: Create Tag mapping Link
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /tag-mapping-links/unlink:
+    post:
+      summary: Unlink Tag Mapping
+      operationId: unlinkTagMapping
+      tags:
+        - Unlink Tag mapping
+      requestBody:
+        description: Create Tag mapping Link
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /event-configs/override:
+    post:
+      summary: create event config override operation
+      operationId: createEventConfigOverride
+      tags:
+        - EventConfig
+      requestBody:
+        description: create Event Config Override post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+
+  /event-configs:
+    post:
+      summary: create event config operation
+      operationId: createEventConfig
+      tags:
+        - EventConfig
+      requestBody:
+        description: create Event Config post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /event-configs/{event_config_id}:
+    put:
+      summary: update eventConfig operation
+      operationId: updateEventConfig
+      tags:
+        - EventConfig
+      parameters:
+        - name: event_config_id
+          in: path
+          description: EventConfig ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update eventConfig
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete EventConfig operation
+      operationId: deleteEventConfig
+      tags:
+        - EventConfig
+      parameters:
+        - name: event_config_id
+          in: path
+          description: EventConfig ID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+  /component-instances/rename:
+    post:
+      summary: rename component instance
+      operationId: renameComponentInstance
+      requestBody:
+        description: rename component instance
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /subscriptions:
+    post:
+      summary: create subscriptions operation
+      operationId: createSubscriptions
+      tags:
+        - Subscriptions
+      requestBody:
+        description: create subscriptions post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    put:
+      summary: update subscriptions operation
+      operationId: updateSubscriptions
+      tags:
+        - Subscriptions
+      requestBody:
+        description: update subscriptions
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /subscriptions/{subscription_id}:
+    delete:
+      summary: delete Subscription operation
+      operationId: deleteSubscription
+      tags:
+        - Subscriptions
+      parameters:
+        - name: subscription_id
+          in: path
+          description: Subscription ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+
+  /live-data-mappings/list:
+    post:
+      summary: get LiveDataMapping operation
+      operationId: readLiveDataMapping
+      tags:
+        - LiveDataMapping
+      requestBody:
+        description: Read Live Data Mapping request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /ds-node-tag:
+    post:
+      summary: create ds node tags
+      operationId: createDsNodeTag
+      tags:
+        - datasource node tag
+      requestBody:
+        description: create datasource node tag post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /ds-node-tag/{ds_node_tag_uuid}:
+    put:
+      summary: update datasource node tag operation
+      operationId: updateDsNodeTag
+      tags:
+        - datasource node tag
+      parameters:
+        - name: ds_node_tag_uuid
+          in: path
+          description: Datasource Node Tag UUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update datasource node tag
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete datasource node tag operation
+      operationId: deleteDsNodeTag
+      tags:
+        - datasource node tag
+      parameters:
+        - name: ds_node_tag_uuid
+          in: path
+          description: Datasource Node Tag UUID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /perspectives:
+    post:
+      summary: create perspective operation
+      operationId: createPerspective
+      tags:
+        - Perspective
+      requestBody:
+        description: create perspective
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    put:
+      summary: update perspective
+      operationId: updatePerspective
+      tags:
+        - Perspective
+      requestBody:
+        description: Update perspective
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    get:
+      summary: get User Perspective Data
+      operationId: getUserPerspectives
+      tags:
+        - Perspective
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /perspectives/{perspective_id}:
+    delete:
+      summary: delete perspective
+      operationId: deletePerspective
+      tags:
+        - Perspective
+      parameters:
+        - name: perspective_id
+          in: path
+          description: Perspective UUID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /perspectives/{perspective_id}/makedefault:
+    post:
+      summary: set default perspective operation
+      operationId: setDefaultPerspective
+      tags:
+        - Perspective
+      parameters:
+        - name: perspective_id
+          in: path
+          description: Perspective UUID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /perspective-trees:
+    post:
+      summary: create perspective tree node operation
+      operationId: createPerspectiveTreeNode
+      tags:
+        - Perspective Tree
+      requestBody:
+        description: create perspective tree node
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    put:
+      summary: update perspective tree node
+      operationId: updatePerspectiveTreeNode
+      tags:
+        - Perspective Tree
+      requestBody:
+        description: Update perspective tree node
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /perspective-trees/{perspective_tree_node_id}:
+    delete:
+      summary: delete perspective tree node
+      operationId: deletePerspectiveTreeNode
+      tags:
+        - Perspective
+      parameters:
+        - name: perspective_tree_node_id
+          in: path
+          description: Perspective UUID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /perspective-trees/move-node/{source_node_id}/to/{target_node_id}:
+    post:
+      summary: move perspective tree node
+      operationId: movePerspectiveTreeNode
+      tags:
+        - Perspective
+      parameters:
+        - in: path
+          name: source_node_id
+          description: Source Tree Node Id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: target_node_id
+          description: Target Tree Node Id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: node_index
+          schema:
+            type: integer
+          required: false
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /property-override:
+    post:
+      summary: create property override operation
+      operationId: createPropertyOverride
+      tags:
+        - PropertyOverride
+      requestBody:
+        description: create Property Override post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /property-override/{property_id}:
+    put:
+      summary: update overridden property operation
+      operationId: updatePropertyOverride
+      tags:
+        - PropertyOverride
+      parameters:
+        - name: property_id
+          in: path
+          description: Property ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update PropertyOverride
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete overridden property operation
+      operationId: deletePropertyOverride
+      tags:
+        - PropertyOverride
+      parameters:
+        - name: property_id
+          in: path
+          description: Property ID
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /panels:
+    post:
+      summary: create panel operation
+      operationId: createPanel
+      tags:
+        - Dashboard
+      requestBody:
+        description: create Panel post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /panels/{panel_id}:
+    put:
+      summary: update panel operation
+      operationId: updatePanel
+      tags:
+        - Dashboard
+      parameters:
+        - name: panel_id
+          in: path
+          description: Panel ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update Panel
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete panel operation
+      operationId: deletePanel
+      tags:
+        - Dashboard
+      parameters:
+        - name: panel_id
+          in: path
+          description: Panel ID
+          required: true
+          schema:
+            type: string
+      responses:
+          '204':
+            description: Ok
+          '404':
+            description: Resource not found
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Payload'
+          '500':
+            description: Unexpected error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Payload'
+
+  /dashboards:
+    post:
+      summary: create dashboard operation
+      operationId: createDashboard
+      tags:
+        - Dashboard
+      requestBody:
+        description: create Dashboard post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /dashboards/{dashboard_id}:
+    put:
+      summary: update dashboard operation
+      operationId: updateDashboard
+      tags:
+        - Dashboard
+      parameters:
+        - name: dashboard_id
+          in: path
+          description: Dashboard ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update Dashboard
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete dashboard operation
+      operationId: deleteDashboard
+      tags:
+        - Dashboard
+      parameters:
+        - name: dashboard_id
+          in: path
+          description: Dashboard ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+
+  /aggr-configs:
+    post:
+      summary: create Aggregated Config operation
+      operationId: createAggConfig
+      tags:
+        - Aggregated Configs
+      requestBody:
+        description: create Aggregated Config post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /aggr-configs/{aggr_config_id}:
+    put:
+      summary: update Aggregated Config operation
+      operationId: updateAggConfig
+      tags:
+        - Aggregated Configs
+      parameters:
+        - name: aggr_config_id
+          in: path
+          description: Agg Config ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update Aggregated Config
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete Aggregated Config operation
+      operationId: deleteAggConfig
+      tags:
+        - Aggregated Configs
+      parameters:
+        - name: aggr_config_id
+          in: path
+          description: Agg Config ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /agg-data:
+    post:
+      summary: get Aggregated Functions Data
+      operationId: getAggData
+      tags:
+        - Aggregated Configs
+      requestBody:
+        description: get Aggregated Configs data request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+
+  /annotations:
+    post:
+      summary: create annotation operation
+      operationId: createAnnotation
+      tags:
+        - Annotation
+      requestBody:
+        description: create Annotation post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    get:
+      summary: get Asset Annotations Data
+      operationId: getAssetAnnotations
+      tags:
+        - Annotation
+      parameters:
+        - in: query
+          name: asset_id
+          schema:
+            type: string
+          description: asset UUID
+        - in: query
+          name: start_time
+          schema:
+            type: string
+          description: format should be ' yyyy-MM-dd'T'HH:mm:ss.SSS'Z' '
+        - in: query
+          name: end_time
+          schema:
+            type: string
+          description: format should be ' yyyy-MM-dd'T'HH:mm:ss.SSS'Z' '
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /annotations/{annotation_id}:
+    put:
+      summary: update annotation operation
+      operationId: updateAnnotation
+      tags:
+        - Annotation
+      parameters:
+        - name: annotation_id
+          in: path
+          description: Annotation ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update Annotation
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete annotation operation
+      operationId: deleteAnnotation
+      tags:
+        - Annotation
+      parameters:
+        - name: annotation_id
+          in: path
+          description: Annotation ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /customers:
+    post:
+      summary: create customer operation
+      operationId: createCustomer
+      tags:
+        - Customer
+      requestBody:
+        description: create customer post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /customers/{customer_id}:
+    put:
+      summary: update customer operation
+      operationId: updateCustomer
+      tags:
+        - Customer
+      parameters:
+        - name: customer_id
+          in: path
+          description: Customer ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update Customer
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete customer operation
+      operationId: deleteCustomer
+      tags:
+        - Customer
+      parameters:
+        - name: customer_id
+          in: path
+          description: Customer ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /users:
+    post:
+      summary: create user operation
+      operationId: createUser
+      tags:
+        - User
+      requestBody:
+        description: create user post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /users/{user_id}:
+    put:
+      summary: update user operation
+      operationId: updateUser
+      tags:
+        - User
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update Customer
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete user operation
+      operationId: deleteUser
+      tags:
+        - User
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /user-groups:
+    post:
+      summary: create user group
+      operationId: createUserGroup
+      tags:
+        - UserGroup
+      requestBody:
+        description: create user group post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /user-groups/{user_group_id}:
+    put:
+      summary: update user group operation
+      operationId: updateUserGroup
+      tags:
+        - UserGroup
+      parameters:
+        - name: user_group_id
+          in: path
+          description: User Group ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update user group
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete user group operation
+      operationId: deleteUserGroup
+      tags:
+        - UserGroup
+      parameters:
+        - name: user_group_id
+          in: path
+          description: User Group ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /user-group-members/add:
+    post:
+      summary: add users in group
+      operationId: addUsersInGroup
+      tags:
+        - UserGroup
+      requestBody:
+        description: add users in a group post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /user-group-members/remove:
+    post:
+      summary: remove users from group
+      operationId: removeUsersFromGroup
+      tags:
+        - UserGroup
+      requestBody:
+        description: remove users from group post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /sparkplug-ds-nodes/purge:
+    delete:
+      summary: purge unused sparkplug datasource nodes
+      operationId: purgeSpDsNodes
+      tags:
+        - datasource node
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /gqls/{gql_name}/query:
+    post:
+      summary: run graphQL
+      operationId: runGQL
+      tags:
+        - GQL
+      parameters:
+        - name: gql_name
+          in: path
+          description: GQL name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: run gql post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /acls/create:
+    post:
+      summary: create ACLs
+      operationId: createACLs
+      tags:
+        - ACLs
+      requestBody:
+        description: create ACLs post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /acls/update:
+    post:
+      summary: update ACLs
+      operationId: updateACLs
+      tags:
+        - ACLs
+      requestBody:
+        description: update ACLs post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+
+  /acls/delete:
+    post:
+      summary: delete ACLs
+      operationId: deleteACLs
+      tags:
+        - ACLs
+      requestBody:
+        description: delete ACLs post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /permissions :
+    get:
+      summary: get entity permissions with features
+      operationId: getEntityPermissions
+      tags:
+        - Permissions
+      parameters:
+        - name: entity_id
+          in: query
+          description: Entity ID (optional)
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /roles:
+    post:
+      summary: create roles
+      operationId: createRole
+      tags:
+        - Roles
+      requestBody:
+        description: create role post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    put:
+      summary: update role operation
+      operationId: updateRole
+      tags:
+        - Roles
+      requestBody:
+        description: update role
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+    delete:
+      summary: delete role operation
+      operationId: deleteRole
+      tags:
+        - Roles
+      requestBody:
+        description: delete role
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /auto-link:
+    post:
+      summary: create asset auto linking
+      operationId: assetAutoLinking
+      tags:
+        - Assets
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /ds-nodes/{ds_node_uuid}:
+    get:
+      summary: get ds node and it's linked assets
+      operationId: getDsNode
+      tags:
+        - DsNode
+      parameters:
+        - name: ds_node_uuid
+          in: path
+          description: uuid of the ds-node
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /events:
+    post:
+      summary: get asset events
+      operationId: assetEvents
+      tags:
+        - Assets, Events
+      requestBody:
+        description: get asset events post request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /set-log-level:
+    post:
+      summary: change service log level
+      operationId: changeLogLevel
+      tags:
+        - Logging
+      parameters:
+        - in: query
+          name: level
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '201':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /registered-groups:
+    post:
+      summary: register new group
+      operationId: createRegisteredGroup
+      tags:
+        - RegisteredGroup
+      requestBody:
+        description: add register group request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /registered-groups/{registered_group_id}:
+    put:
+      summary: update RegisteredGroup operation
+      operationId: updateRegisteredGroup
+      tags:
+        - RegisteredGroup
+      parameters:
+        - name: registered_group_id
+          in: path
+          description: RegisteredGroup ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: update registered group
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+    delete:
+      summary: delete RegisteredGroup operation
+      operationId: deleteRegisteredGroup
+      tags:
+        - RegisteredGroup
+      parameters:
+        - name: registered_group_id
+          in: path
+          description: RegisteredGroup ID
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+
+  /component-types:
+    post:
+      summary: add new comp type
+      operationId: createCompType
+      tags:
+        - Component
+      requestBody:
+        description: add comp type request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /component-types/{comp_type_id}:
+    put:
+      summary: update compType operation
+      operationId: updateCompType
+      tags:
+        - Component
+      parameters:
+        - name: comp_type_id
+          in: path
+          description: CompType ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: update compType
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+    delete:
+      summary: delete compType operation
+      operationId: deleteCompType
+      tags:
+        - Component
+      parameters:
+        - name: comp_type_id
+          in: path
+          description: CompType ID
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /model-types:
+    post:
+      summary: add new model type
+      operationId: createModelType
+      tags:
+        - Model
+      requestBody:
+        description: add model type request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /model-types/{model_type_id}:
+    put:
+      summary: update modelType operation
+      operationId: updateModelType
+      tags:
+        - Model
+      parameters:
+        - name: model_type_id
+          in: path
+          description: ModelType ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: update ModelType
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+    delete:
+      summary: delete modelType operation
+      operationId: deleteModelType
+      tags:
+        - Model
+      parameters:
+        - name: model_type_id
+          in: path
+          description: ModelType ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /vendors:
+    post:
+      summary: add new vendor
+      operationId: createVendor
+      tags:
+        - Component
+      requestBody:
+        description: add vendor request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /vendors/{vendor_id}:
+    put:
+      summary: update vendor operation
+      operationId: updateVendor
+      tags:
+        - Component
+      parameters:
+        - name: vendor_id
+          in: path
+          description: Vendor ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: update vendor
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+    delete:
+      summary: delete vendor operation
+      operationId: deleteVendor
+      tags:
+        - Component
+      parameters:
+        - name: vendor_id
+          in: path
+          description: Vendor ID
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /quality-codes:
+    post:
+      summary: add new quality-code
+      operationId: createQualityCode
+      tags:
+        - Ref
+      requestBody:
+        description: add quality code request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '201':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /quality-codes/{quality_code}:
+    put:
+      summary: update quality-code operation
+      operationId: updateQualityCode
+      tags:
+        - Ref
+      parameters:
+        - name: quality_code
+          in: path
+          description: Quality Code
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: update quality msg
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payload'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+    delete:
+      summary: delete quality-code operation
+      operationId: deleteQualityCode
+      tags:
+        - Component
+      parameters:
+        - name: quality_code
+          in: path
+          description: Quality Code
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        '204':
+          description: Ok
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /get-nodes:
+    get:
+      summary: get sp group nodes
+      operationId: getSPNodes
+      parameters:
+        - in: query
+          name: groupId
+          required: true
+          schema:
+            type: string
+          description: Group Name
+      tags:
+        - SP Tree
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /get-devices:
+    get:
+      summary: get sp node devices
+      operationId: getSPDevices
+      parameters:
+        - in: query
+          name: groupId
+          required: true
+          schema:
+            type: string
+          description: Group Name
+        - in: query
+          name: nodeId
+          required: true
+          schema:
+            type: string
+          description: Node Name
+      tags:
+        - SP Tree
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+  /get-dsnode-tags:
+    get:
+      summary: get ds node tags
+      operationId: getDsNodeTags
+      parameters:
+        - in: query
+          name: groupId
+          required: true
+          schema:
+            type: string
+          description: Group Name
+        - in: query
+          name: nodeId
+          required: true
+          schema:
+            type: string
+          description: Node Name
+        - in: query
+          name: deviceId
+          required: false
+          schema:
+            type: string
+          description: Device Name
+      tags:
+        - SP Tree
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payload'
+
+components:
+  securitySchemes:
+    iotech_config_api:
+      scheme: bearer
+      type: http
+      description: Token based authentication
+
+  schemas:
+    Payload:
+      allOf:
+        - $ref: '#/components/schemas/Header'
+        - type: object
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/EntityDetails'
+            result:
+              $ref: '#/components/schemas/ResponseResult'
+            error:
+              $ref: "#/components/schemas/Error"
+            stats:
+              $ref: '#/components/schemas/Stats'
+            metaData:
+              $ref: '#/components/schemas/MetaData'
+
+    EntityDetails:
+      anyOf:
+        - $ref: '#/components/schemas/Component'
+        - $ref: '#/components/schemas/Measurement'
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/Asset'
+        - $ref: '#/components/schemas/Image'
+        - $ref: '#/components/schemas/Uom'
+        - $ref: '#/components/schemas/Datasource'
+        - $ref: '#/components/schemas/DatasourceNode'
+        - $ref: '#/components/schemas/EntityDatasourceNodeLink'
+        - $ref: '#/components/schemas/TagMappingLinks'
+        - $ref: '#/components/schemas/EventConfig'
+        - $ref: '#/components/schemas/Subscription'
+        - $ref: '#/components/schemas/DsNodeTag'
+        - $ref: '#/components/schemas/Perspective'
+        - $ref: '#/components/schemas/PerspectiveTreeNode'
+        - $ref: '#/components/schemas/Request'
+        - $ref: '#/components/schemas/ComponentInstance'
+        - $ref: '#/components/schemas/Property'
+        - $ref: '#/components/schemas/Panel'
+        - $ref: '#/components/schemas/Dashboard'
+        - $ref: '#/components/schemas/AggConfig'
+        - $ref: '#/components/schemas/AggDataRes'
+        - $ref: '#/components/schemas/FetchAggDataReq'
+        - $ref: '#/components/schemas/Annotation'
+        - $ref: '#/components/schemas/writeback'
+        - $ref: '#/components/schemas/AssetSummary'
+        - $ref: '#/components/schemas/UserPerspectives'
+        - $ref: '#/components/schemas/Customer'
+        - $ref: '#/components/schemas/User'
+        - $ref: '#/components/schemas/UserGroup'
+        - $ref: '#/components/schemas/UserGroupMembers'
+        - $ref: '#/components/schemas/ACLRequest'
+        - $ref: '#/components/schemas/Feature'
+        - $ref: '#/components/schemas/Role'
+        - $ref: '#/components/schemas/RoleDelete'
+        - $ref: '#/components/schemas/GetDsNode'
+        - $ref: '#/components/schemas/GetAssetEventsRequest'
+        - $ref: '#/components/schemas/RegisteredGroup'
+        - $ref: '#/components/schemas/RefModelCompTypes'
+        - $ref: '#/components/schemas/RefVendor'
+
+    Header:
+      type: object
+      required:
+        - specVersion
+        - type
+        - source
+        - id
+        - time
+        - dataContentType
+      properties:
+        specVersion:
+          type: string
+          example: 1.0.0
+        type:
+          description: 'Operation:(Get) EntityType: (TsRead)'
+          type: string
+          example: '<Operation>-<EntityType>-req'
+        source:
+          description: 'The source system (client) initiating this request'
+          type: string
+          example: 'intellija-ui'
+        id:
+          description: 'Unique ID generated by the system that created this request'
+          type: string
+          example: 'C234-1234-1234'
+        time:
+          description: 'Time in ISO 8601 format when request created'
+          type: string
+          example: '2020-03-31T17:31:00.123Z'
+        dataContentType:
+          type: string
+          example: 'application/json'
+
+    Component:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        componentTypeId:
+          type: integer
+        vendorId:
+          type: integer
+        notes:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        image:
+          $ref: '#/components/schemas/Image'
+        isActive:
+          type: boolean
+        sourceModelId:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
+
+    Measurement:
+      type: object
+      required:
+        - name
+        - baseUom
+        - baseUomAbbreviation
+      properties:
+        name:
+          type: string
+        derivedUom:
+          type: string
+        baseUom:
+          type: string
+        description:
+          type: string
+        baseUomAbbreviation:
+          type: string
+
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        modelTypeId:
+          type: integer
+        notes:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        isActive:
+          type: boolean
+        image:
+          $ref: '#/components/schemas/Image'
+        sourceModelId:
+          type: string
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComponentData'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
+
+    Asset:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        image:
+          $ref: '#/components/schemas/Image'
+        isActive:
+          type: boolean
+        sourceModelId:
+          type: string
+        components:
+          type: array
+          items:
+            type: string
+
+    Image:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        entityId:
+          type: string
+        data:
+          type: string
+          maxLength: 600000
+
+    Tag:
+      type: object
+      properties:
+        id:
+          type: string
+        entityId:
+          type: string
+        tagTypeId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        displayName:
+          type: string
+        historizedId:
+          type: string
+        allowWrite:
+          type: boolean
+        details:
+          anyOf:
+            - $ref: '#/components/schemas/StateTags'
+            - $ref: '#/components/schemas/NumberTag'
+            - $ref: '#/components/schemas/TextTag'
+            - $ref: '#/components/schemas/CompCalcTag'
+
+    NumberTag:
+      type: object
+      properties:
+        displayEuId:
+          type: string
+        measurementCategory:
+          type: integer
+        precision:
+          type: integer
+        factor:
+          type: integer
+        offset:
+          type: integer
+        rejectMin:
+          type: integer
+        rejectMax:
+          type: integer
+        isOverride:
+          type: boolean
+        histPercentChange:
+          type: integer
+        isThousandSeparator:
+          type: boolean
+
+    StateTags:
+      type: object
+      properties:
+        states:
+          type: array
+          items:
+            $ref: '#/components/schemas/StateTag'
+
+    StateTag:
+      type: object
+      properties:
+        id:
+          type: string
+        state:
+          type: string
+        value:
+          type: integer
+        isBlink:
+          type: boolean
+        isActive:
+          type: boolean
+        color:
+          type: string
+
+    TextTag:
+      type: object
+      properties:
+        value:
+          type: string
+
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 500 or 400
+        message:
+          type: string
+          example: "something went wrong"
+
+    ResponseResult:
+      type: object
+      required:
+        - corrId
+        - status
+      properties:
+        status:
+          type: string
+          example: ok
+        corrId:
+          type: string
+          example: 'C234-1234-1234'
+          description: 'The value in this field should be the same as what was received in the "id" field of the corresponding request'
+
+    Stats:
+      type: object
+      required:
+        - requestReceivedTime
+        - dbExecTimeMs
+        - totalExecTimeMs
+      properties:
+        requestReceivedTime:
+          description: 'Time when the server received this request. Note that it contains the millseconds part too.'
+          type: string
+          example: '2020-03-31T17:31:14.235Z'
+        dbExecTimeMs:
+          description: 'Time it took (in milliseconds) for the overall request to be processed by the db server. Blank in error case'
+          type: number
+          format: double
+        totalExecTimeMs:
+          description: 'Time it took (in milliseconds) for the overall request to be processed by the server'
+          type: integer
+          format: int64
+
+    MetaData:
+      type: object
+      required:
+        - moreRecordsAvailable
+        - nextRecordOffset
+        - recordsCount
+      properties:
+        moreRecordsAvailable:
+          description: 'if more records available on that request for next page'
+          type: string
+          example: '2020-03-31T17:31:14.235Z'
+        nextRecordOffset:
+          description: 'next offset number for fetching next page records'
+          type: integer
+        recordsCount:
+          description: 'total number of records in response after applying all filters requested by user'
+          type: integer
+
+    Datasource:
+      type: object
+      properties:
+        id:
+          description: Auto generated UUID
+          type: string
+        name:
+          description: 'Datasource name'
+          type: string
+        datasourceTypeId:
+          description: 'reference UUID of datasource types'
+          type: string
+        config:
+          description: 'Configuration properties in JSON format'
+          type: object
+
+    DatasourceNode:
+      type: object
+      properties:
+        id:
+          description: Auto generated UUID
+          type: string
+        name:
+          description: 'DS Node name'
+          type: string
+        type:
+          description: 'reference UUID of DS Node Type'
+          type: string
+        datasourceId:
+          description: 'reference UUID of Datasource'
+          type: string
+        config:
+          description: 'Configuration properties in JSON format'
+          type: object
+
+    Uom:
+      type: object
+      required:
+        - name
+        - factor
+        - offset
+        - symbol
+        - measurementId
+      properties:
+        name:
+          type: string
+        symbol:
+          type: string
+        baseUomId:
+          type: integer
+        measurementId:
+          type: integer
+        uomGroupId:
+          type: integer
+        factor:
+          type: number
+        offset:
+          type: number
+        referenceUomId:
+          type: integer
+        referenceFactor:
+          type: number
+        referenceOffset:
+          type: number
+        isBaseUom:
+          type: boolean
+
+    EntityDatasourceNodeLink:
+      type: object
+      properties:
+        id:
+          description: Auto generated UUID
+          type: string
+        entityId:
+          description: Entity ID
+          type: string
+        datasourceNodeId:
+          description: Datasource Node Id
+          type: string
+        effectiveFrom:
+          description: date effective from
+          type: string
+        effectiveTo:
+          description: date effective To
+          type: string
+        isDeleted:
+          description: is deleted flag
+          type: boolean
+        isLinked:
+          description: is Linked flag
+          type: boolean
+
+    TagMappingLinks:
+      type: object
+      properties:
+        commentCode:
+          type: string
+        linkList:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagMappingLink'
+
+    TagMappingLink:
+      type: object
+      properties:
+        id:
+          description: Auto generated UUID
+          type: string
+        entityDsNodeLinkId:
+          description: Entity DS Node LinkId
+          type: string
+        entityTagId:
+          description: Entity Tag Id
+          type: string
+        dsNodeTagId:
+          description: DS Node Tag Id
+          type: string
+        componentInstanceId:
+          description: component instance id
+          type: string
+        isLinked:
+          description: is Linked flag
+          type: boolean
+        validatedDsUom:
+          description: validated ds uom
+          type: integer
+
+    ComponentData:
+      type: object
+      properties:
+        componentId:
+          type: string
+        modelComponentId:
+          type: string
+        numComponentInstances:
+          type: integer
+        componentInstances:
+          type: array
+          items:
+            $ref: "#/components/schemas/ComponentInstance"
+
+    ComponentInstance:
+      type: object
+      required:
+        - id
+        - name
+        - modelId
+        - componentId
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        modelId:
+          type: string
+        componentId:
+          type: string
+
+    EventConfig:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        eventConfigType:
+          type: string
+        parentConfigId:
+          type: string
+        isEnabled:
+          type: boolean
+        isOverride:
+          type: boolean
+        eventConfigDetails:
+          $ref: '#/components/schemas/EventConfigDetails'
+        eventActions:
+          type: object
+        additionalProperties:
+          type: object
+
+    EventConfigDetails:
+      anyOf:
+        - $ref: '#/components/schemas/AlarmEventConfigDetails'
+
+    AlarmEventConfigDetails:
+      type: object
+      properties:
+        tagId:
+          type: string
+        componentId:
+          type: string
+        componentInstanceId:
+          type: string
+        assetId:
+          type: string
+        conditionType:
+          type: string
+        severity:
+          type : string
+        setpoint:
+          type: number
+        rangeMin:
+          type: number
+        rangeMax:
+          type: number
+        rocValue:
+          type: number
+        time:
+          type: integer
+        groupName:
+          type: string
+        autoAck:
+          type: boolean
+        reAlarm:
+          type: boolean
+        latch:
+          type: boolean
+        message:
+          type: string
+        recommendedAction:
+          type: string
+
+    Subscription:
+      type: object
+      properties:
+        assetId:
+          type: string
+        eventTypeId:
+          type: string
+        subscriptionDetails:
+          $ref: '#/components/schemas/SubscriptionDetails'
+
+
+    SubscriptionDetails:
+      type: array
+      items:
+        anyOf:
+          - $ref: '#/components/schemas/AlarmSubscriptionDetail'
+
+
+
+    AlarmSubscriptionDetail:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+        eventConfigId:
+          type: string
+        componentInstanceId:
+          type: string
+        userId:
+          type: string
+        email:
+          type: boolean
+        sms:
+          type: boolean
+        browser:
+          type: boolean
+        whatsapp:
+          type: boolean
+
+    LiveDataMappingRequest:
+      type: object
+      properties:
+        assetId:
+          type: string
+        componentInstanceId:
+          type: string
+        tagIds:
+          type: array
+          items:
+            type: string
+
+    LiveDataMappingResponse:
+      type: object
+      properties:
+        assetId:
+          type: string
+        componentInstanceId:
+          type: string
+        linkedTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkedTag'
+
+    LinkedTag:
+      type: object
+      properties:
+        tagId:
+          type: string
+        mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagIdMapping'
+
+    TagIdMapping:
+      type: object
+      properties:
+        dsNodeUUID:
+          type: string
+        dsNodeId:
+          type: integer
+        dsNodeTagUUID:
+          type: string
+        dsNodeTagId:
+          type: integer
+        effectiveFrom:
+          type: string
+        effectiveTo:
+          type: string
+
+    DsNodeTag:
+      type: object
+      properties:
+        id:
+          description: Auto generated UUID
+          type: string
+        name:
+          description: 'DS Node Tag name'
+          type: string
+        dsNodeId:
+          description: 'reference UUID of DS Node '
+          type: string
+        config:
+          description: 'Configuration properties in JSON format'
+          type: object
+        dsUom:
+          description: 'Unit of measurement'
+          type: string
+
+    Perspective:
+      type: object
+      properties:
+        id:
+          description: Autogenerated UUID
+          type: string
+        name:
+          description: 'Perspective Name'
+          type: string
+        displayName:
+          description: 'Perspective Display Name'
+          type: string
+        isDefault:
+          description: 'Only used for get perspective ofr user'
+          type: boolean
+        userGroups:
+          type: array
+          items:
+            type: string
+
+    PerspectiveTreeNode:
+      type: object
+      properties:
+        id:
+          description: 'Autogenerated UUID'
+          type: string
+        perspectiveId:
+          description: 'Perspective Id'
+          type: string
+        parentId:
+          description: 'refers to id of same entity type as parent relation'
+          type: string
+        nodeIndex:
+          description: 'Node index'
+          type: integer
+        name:
+          description: 'Perspective Tree Node Name'
+          type: string
+        treeNodeType:
+          description: 'Tree Node Type'
+          type: string
+        entityId:
+          description: 'Asset Id'
+          type: string
+        latitude:
+          description: 'Latitude'
+          type: number
+        longitude:
+          description: 'Longitude'
+          type: number
+
+
+    Request:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    CompCalcTag:
+      type: object
+      required:
+        - script
+        - outputType
+        - scriptInputTags
+      properties:
+        outputType:
+          type: string
+        script :
+          type: string
+        scriptInputTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/scriptInputTag'
+        aggConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/scriptInputTag'
+        scriptInputProps:
+          type: array
+          items:
+            $ref: '#/components/schemas/scriptInputTag'
+
+
+    scriptInputTag:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        modelId:
+          type: string
+        componentInstanceId:
+          type: string
+
+    Property:
+      type: object
+      properties:
+        id:
+          type: string
+        entityId:
+          type: string
+        name:
+          type: string
+        value:
+          type: string
+        dataTypeId:
+          type: string
+        assetId:
+          type: string
+        componentInstanceId:
+          type: string
+        parentPropertyId:
+          type: string
+        isOverride:
+          type: boolean
+
+    Panel:
+      type: object
+      required:
+        - name
+        - themeId
+        - entityId
+        - perspectiveGroupId
+        - chartId
+        - rows
+        - cols
+        - panelType
+      properties:
+        id:
+          type: string
+        themeId:
+          type: number
+        name:
+          type: string
+        entityId:
+          type: string
+        perspectiveGroupId:
+          type: string
+        chartId:
+          type: number
+        rows:
+          type: number
+        cols:
+          type: number
+        config:
+          type: object
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/panelTag'
+        aggConfigs:
+          type: array
+          items:
+            type: string
+        panelType:
+          type: string
+
+    panelTag:
+      type: object
+      properties:
+        assetId:
+          type: string
+        tagId:
+          type: string
+        componentInstanceId:
+          type: string
+
+    Dashboard:
+      type: object
+      required:
+        - name
+        - entityId
+        - panels
+        - path
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        path:
+          type: string
+        entityId:
+          type: string
+        perspectiveGroupId:
+          type: string
+        description:
+          type: string
+        isDefault:
+          type: boolean
+        isAggDashboard:
+          type: boolean
+        panels:
+          type: array
+          items:
+            $ref: '#/components/schemas/dashboardPanelObj'
+
+    dashboardPanelObj:
+      type: object
+      required:
+        - panelId
+        - x
+        - y
+      properties:
+        panelId:
+          type: string
+        x:
+          type: number
+        y:
+          type: number
+        rows:
+          type: number
+        cols:
+          type: number
+
+    AggConfig:
+      type: object
+      required:
+        - funcId
+        - tags
+        - name
+        - type
+        - aggrConfigs
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        funcId:
+          type: integer
+        perspectiveGroupId:
+          type: string
+        entityId:
+          type: string
+        timeRangeId:
+          type: string
+        tags:
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/aggConfigTag'
+        aggrConfigs:
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/FetchAggConfigObj'
+        funcConfig:
+          $ref: '#/components/schemas/funcConfig'
+
+    aggConfigTag:
+      type: object
+      required:
+        - tagId
+        - tagName
+      properties:
+        assetId:
+          type: string
+        assetName:
+          type: string
+        tagId:
+          type: string
+        tagName:
+          type: string
+        compInstanceId:
+          type: string
+        compInstanceName:
+          type: string
+
+    funcConfig:
+      type: object
+      required:
+        - countCondition
+        - value
+      properties:
+        countCondition:
+          type: string
+        value:
+          type: string
+        x:
+          type: string
+          description: only for in range and out range initial point
+        y:
+          type: string
+          description: only for in range and out range final point
+
+
+    AggDataRes:
+      type: object
+      properties:
+        configs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggConfigView'
+
+    FetchAggDataReq:
+      type: object
+      properties:
+        aggConfigs:
+          type: array
+          items:
+            $ref: '#/components/schemas/FetchAggConfigObj'
+
+
+    AggConfigView:
+      type: object
+      properties:
+        aggConfigId:
+          type: string
+        v:
+          type: string
+        eu:
+          type: string
+        t:
+          type: string
+        details:
+          type: object
+
+
+    FetchAggConfigObj:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        assetId:
+          type: string
+          description: only used for time bucket agg
+        componentInstanceId:
+          type: string
+          description: only used for time bucket agg
+
+    Annotation:
+      type: object
+      required:
+        - name
+        - assetId
+        - timestamp
+        - tags
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        assetId:
+          type: string
+        timestamp:
+          type: string
+          description: format should be ' yyyy-MM-dd'T'HH:mm:ss.SSS'Z' '
+        tags:
+          type: array
+          items:
+            type: object
+
+
+    writeback:
+      type: object
+      required:
+        - tags
+        - authDetails
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/WriteBackTag'
+        authDetails:
+          $ref: '#/components/schemas/Request'
+
+    WriteBackTag:
+      type: object
+      required:
+        - assetId
+        - componentInstanceId
+        - tagId
+        - value
+        - engUnit
+      properties:
+        assetId:
+          description: 'Asset UUID'
+          type: string
+        componentInstanceId:
+          description: 'componentInstance UUID'
+          type: string
+        tagId:
+          description: 'Tag UUID'
+          type: string
+        value:
+          description: 'Tag value'
+          type: string
+        engUnit:
+          description: 'eng unit'
+          type: string
+
+    AssetSummary:
+      type: object
+      properties:
+        isLinked:
+          type: boolean
+          description: 'return true if any ds node with atleast 1 tag is linked'
+        lastUnlinkTime:
+          type: string
+          description: 'return timestamp of last Ds Node unlink, if isLinked is false'
+        hasAlarm:
+          type: boolean
+          description: 'return true if any alarm is active on that Asset'
+        lastTagUpdatedTime:
+          type: string
+          description: 'return timestamp of any tag that was updated with liveData recently.'
+        linkedTags:
+          type: array
+          items:
+            type: object
+          description: 'if isLinked is true, this list with contains all tags which are linked. each entry will have comp instance id, tag id and timestamp when it was linked'
+
+    UserPerspectives:
+      type: array
+      items:
+        $ref: '#/components/schemas/Perspective'
+
+    Customer:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+
+
+    User:
+      type: object
+      required:
+        - username
+        - firstName
+        - lastName
+        - email
+        - mobileNo
+        - customerId
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        mobileNo:
+          type: string
+        isActive:
+          type: boolean
+        customerId:
+          type: string
+
+    UserGroup:
+      type: object
+      required:
+        - name
+        - path
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        path:
+          type: string
+        roles:
+          type: array
+
+    Feature:
+      type: object
+      required:
+        - name
+        - displayName
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+
+    UserGroupMembers:
+      type: object
+      required:
+        - users
+        - groups
+      properties:
+        users:
+          type: array
+        groups:
+          type: array
+
+    ACLRequest:
+      type: object
+      required:
+        - acls
+      properties:
+        acls:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/ACLsCreate'
+              - $ref: '#/components/schemas/ACLsUpdate'
+              - $ref: '#/components/schemas/ACLsDelete'
+
+    ACLsCreate:
+      type: object
+      required:
+        - entityId
+        - read
+        - write
+        - delete
+      properties:
+        userId:
+          type: string
+        userGroupId:
+          type: string
+        entityId:
+          type: string
+        read:
+          type: boolean
+        write:
+          type: boolean
+        delete:
+          type: boolean
+
+    ACLsUpdate:
+      type: object
+      required:
+        - id
+        - read
+        - write
+        - delete
+      properties:
+        id:
+          type: string
+        read:
+          type: boolean
+        write:
+          type: boolean
+        delete:
+          type: boolean
+
+
+    ACLsDelete:
+      type: string
+
+
+
+    Role:
+      type: object
+      required:
+        - name
+        - displayName
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        features:
+          type: array
+
+    RoleDelete:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+
+    GetDsNode:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ds node id
+        name:
+          type: string
+          description: ds node name
+        linkedAssets:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+                description: asset id
+              name:
+                type: string
+                description: asset name
+
+    GetAssetEventsRequest:
+      type: object
+      required:
+        - assetId
+        - fromDate
+        - toDate
+        - nextRecordOffset
+      properties:
+        assetId:
+          type: string
+          description: asset id
+        fromDate:
+          type: string
+        toDate:
+          type: string
+        nextRecordOffset:
+          type: integer
+        eventsToInclude:
+          type: array
+          description: "events UI can fetch if needed for any specific else don't add this for all ['alarm', 'writeback', 'dsnode-unlinked', 'tag-unlinked']"
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+                description: tag id
+              componentInstanceId:
+                type: string
+
+    RegisteredGroup:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          description: group id
+        name:
+          type: string
+        customerId:
+          type: string
+
+    RefModelCompTypes:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          description: model/comp type id
+        name:
+          type: string
+        description:
+          type: string
+
+    RefVendor:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          description: Vendor id
+        name:
+          type: string
