@@ -6,7 +6,7 @@ const port = 3000;
   /* Swagger Start */
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
-const swaggerFile = true ? YAML.load('./swagger.yml') : require('./swagger.json');
+const swaggerFile = false ? YAML.load('../swagger.yml') : require('../swagger.json');
 app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerFile));
   /* Swagger End */
 
