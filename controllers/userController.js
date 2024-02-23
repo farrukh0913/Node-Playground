@@ -15,15 +15,26 @@ app.get("/", (req, res) => {
 });
 
 app.get("/users", async (req, res) => {
-  userModel
+  userModel.find().then(function (users) {
+      console.log("users: ", users);
+      res.json(users);
+    }).catch(function (error) {
+      console.log("error: ", error);
+    });
+});
+
+app.get("/users/:id", async (req, res) => {
+  try {
+    const user = await userModel
     .find()
     .then(function (users) {
       console.log("users: ", users);
-      res.json(users);
+      res.json(users[0]);
     })
-    .catch(function (error) {
-      console.log("error: ", error);
-    });
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(500).json({ message: error.message });
+  }
 });
 
 app.post("/users", async (req, res) => {
@@ -64,25 +75,6 @@ app.delete("/users/:id", async (req, res) => {
     }
 
     res.status(200).json(user);
-  } catch (error) {
-    console.log("error: ", error);
-    res.status(500).json({ message: error.message });
-  }
-});
-
-app.post('/autoware', (req, res) => {
-  try {
-    const util = require('util');
-    const exec = util.promisify(require('child_process').exec);
-
-    async function ls() {
-      const { stdout, stderr } = await exec('ls');
-      console.log('stdout:', stdout);
-      console.log('stderr:', stderr);
-      res.status(200).json("Run Successfully!");
-    }
-
-    ls();
   } catch (error) {
     console.log("error: ", error);
     res.status(500).json({ message: error.message });
